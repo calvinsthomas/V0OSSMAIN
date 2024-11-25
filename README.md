@@ -20,6 +20,6 @@ __TEST_RNYCP_ROLLOUT__
 
 # @main="""strededequoteONLINEspacePLUS__TOADDRESSANYOF__YOUR__CONCERNsendedenqte"""
 
-__AS_SEC_SERVICE__
+if @main_act=="""__AS_YOUR_COMBSEC_SERVICE__""" #endedeqtequotesxessssstringmainV000SMODELRISKPARAMTRIGGERRISKFACTORTESTenexesesssssequoteqtedododpipdotdotdor
 
 << if MAIN == "__TO_YOUR_FIRM__"*****
