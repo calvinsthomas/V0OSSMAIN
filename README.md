@@ -2,7 +2,7 @@
 ##  V0OSS MAIN MODEL LOGICs:
 """# hashtagstartmainmaks # @if main="""FULLY ROLLING V('s): SEE yourfirmoffer README documentation (or doc(s) naming conv. (convention) nothingelsehashtagendeqt""" # do not touch"""
 
-# @MAIN="""finalcpytdumpesdumpsYOURPERSONALUNICODEPLUSmainproductofferCOMBSEC"""
+# @MAIN="""finalcpytdumpesdumpsYOURPERSONALUNICODEPLUSmainproductofferCOMBSECKEY"""
 
 ##  NOTE: (CRITICAL SYSTEMS TEST + >>YOUR FIRM OFFER(ING)<<: INFO-HIDDEN IMPL. TECHNIQUES + TEST ONLY)!
 ## COMBINATORICALLY AS A SERVICE OR PER FEATURE REQUEST FOR HELP!
