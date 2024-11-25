@@ -1,6 +1,8 @@
 # (LINKEDIN FORMAT -> MAIN '@' main="""U+1F511"""symbol) V0OSSMAIN
 ##  V0OSS MAIN MODEL LOGICs:
 """# hashtagstartmainmaks # @if main="""FULLY ROLLING V('s): SEE yourfirmoffer README documentation (or doc(s) naming conv. (convention) nothingelsehashtagendeqt""" # do not touch"""
+
+"""HASHTAGMETHV2_INFO_HIDDEN_ATTK_CRIT_PC_SYS_MY_MAIN_CRITOPSFORYOURFIRMOFFER(INGs)"""
       >>ALSOFORTHEeqpipeMALICIOUSMALLOR(IES)STILLATTKcrttingmypcsys/s
       >>ISEEYOUTOO
 ##  NOTE: (CRITICAL SYSTEMS TEST + >>YOUR FIRM OFFER(ING)<<: INFO-HIDDEN IMPL. TECHNIQUES + TEST ONLY)!
