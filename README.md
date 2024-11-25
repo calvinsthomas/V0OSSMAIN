@@ -2,9 +2,8 @@
 ##  V0OSS MAIN MODEL LOGICs:
 """# hashtagstartmainmaks # @if main="""FULLY ROLLING V('s): SEE yourfirmoffer README documentation (or doc(s) naming conv. (convention) nothingelsehashtagendeqt""" # do not touch"""
 
-"""HASHTAGMETHV2_INFO_HIDDEN_ATTK_CRIT_PC_SYS_MY_MAIN_CRITOPSFORYOURFIRMOFFER(INGs)"""
-      >>ALSOFORTHEeqpipeMALICIOUSMALLOR(IES)STILLATTKcrttingmypcsys/s
-      >>hashtagequoteseedonottouchendhashtagswitchdqte
+# @MAIN="""finalcpytdumpesdumpsyourmainproductofferCOMBSEC"""
+
 ##  NOTE: (CRITICAL SYSTEMS TEST + >>YOUR FIRM OFFER(ING)<<: INFO-HIDDEN IMPL. TECHNIQUES + TEST ONLY)!
 ## COMBINATORICALLY AS A SERVICE OR PER FEATURE REQUEST FOR HELP!
 >>V0OSS R.N.Y.C.P. MAIN MODEL HERE<<
