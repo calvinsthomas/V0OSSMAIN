@@ -1,0 +1,287 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 AppleColorEmoji;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw12240\paperh20160\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 # secure_document_transmission.py\
+\
+"""\
+This script demonstrates a secure method for transmitting and circulating documents,\
+comparing the use of test PDF files, Word documents, and the DocSend platform.\
+\
+Main Objectives:\
+- Implement a process that adds metadata to documents, including an AI-generated face,\
+  timestamp, location, and precise author attribution.\
+- Use an industry-standard naming convention with keyword-linked combinatorics,\
+  including emoji-linked combinations to favorite keywords as a form of keyword-sensitive locked sticker.\
+- Highlight the security risks of different document formats and transmission methods.\
+- Adhere to best practices in information hiding, encapsulation, and code documentation.\
+\
+Author Attribution:\
+- Name: Calvin Thomas\
+- Date: Wednesday, Dec. 4, 2024\
+- Location: [Your Location]\
+- Note: This information is added to the document metadata for security and attribution purposes.\
+"""\
+\
+import hashlib\
+import datetime\
+import os\
+from PIL import Image, ImageDraw, ImageFont\
+import PyPDF2\
+from docx import Document\
+\
+class _MetadataManager:\
+    """\
+    Internal class to manage the metadata of documents.\
+    Implements information hiding by keeping sensitive methods and data private.\
+\
+    Methods:\
+    - __generate_hash(): Generates a unique hash based on the document content and metadata.\
+    - __embed_metadata(): Embeds metadata into the document.\
+    """\
+\
+    def __init__(self):\
+        self.__author = "Calvin Thomas"\
+        self.__date = datetime.datetime.now().strftime("%A, %b. %d, %Y")\
+        self.__location = "Your Location"  # Replace with actual location if needed\
+\
+    def __generate_hash(self, content):\
+        """\
+        Generates a unique hash using SHA256 based on content and metadata.\
+\
+        Parameters:\
+        - content (bytes): The binary content of the document.\
+\
+        Returns:\
+        - str: A hexadecimal hash string.\
+        """\
+        hasher = hashlib.sha256()\
+        hasher.update(content)\
+        hasher.update(self.__author.encode())\
+        hasher.update(self.__date.encode())\
+        hasher.update(self.__location.encode())\
+        return hasher.hexdigest()\
+\
+    def __embed_metadata(self, document_path, format):\
+        """\
+        Embeds metadata into the document, including author attribution,\
+        timestamp, location, and a unique hash.\
+\
+        Parameters:\
+        - document_path (str): The path to the document file.\
+        - format (str): The format of the document ('pdf' or 'docx').\
+\
+        Returns:\
+        - str: The path to the new document with embedded metadata.\
+        """\
+        if format == 'pdf':\
+            return self.__embed_pdf_metadata(document_path)\
+        elif format == 'docx':\
+            return self.__embed_docx_metadata(document_path)\
+        else:\
+            raise ValueError("Unsupported document format.")\
+\
+    def __embed_pdf_metadata(self, pdf_path):\
+        """\
+        Embeds metadata into a PDF document.\
+\
+        Parameters:\
+        - pdf_path (str): The path to the PDF file.\
+\
+        Returns:\
+        - str: The path to the new PDF file with embedded metadata.\
+        """\
+        with open(pdf_path, 'rb') as file:\
+            reader = PyPDF2.PdfReader(file)\
+            writer = PyPDF2.PdfWriter()\
+            for page in reader.pages:\
+                writer.add_page(page)\
+            metadata = \{\
+                '/Author': self.__author,\
+                '/CreationDate': self.__date,\
+                '/Location': self.__location,\
+                '/Producer': 'SecureDocumentTransmissionScript',\
+            \}\
+            content = file.read()\
+            hash_value = self.__generate_hash(content)\
+            metadata['/DocumentID'] = hash_value\
+            writer.add_metadata(metadata)\
+            output_path = pdf_path.replace('.pdf', '_secured.pdf')\
+            with open(output_path, 'wb') as output_file:\
+                writer.write(output_file)\
+            return output_path\
+\
+    def __embed_docx_metadata(self, docx_path):\
+        """\
+        Embeds metadata into a Word document.\
+\
+        Parameters:\
+        - docx_path (str): The path to the Word document file.\
+\
+        Returns:\
+        - str: The path to the new Word document with embedded metadata.\
+        """\
+        document = Document(docx_path)\
+        core_properties = document.core_properties\
+        core_properties.author = self.__author\
+        core_properties.created = self.__date\
+        core_properties.comments = f"Location: \{self.__location\}"\
+        with open(docx_path, 'rb') as file:\
+            content = file.read()\
+        hash_value = self.__generate_hash(content)\
+        core_properties.identifier = hash_value\
+        output_path = docx_path.replace('.docx', '_secured.docx')\
+        document.save(output_path)\
+        return output_path\
+\
+    def embed_metadata(self, document_path, format):\
+        """\
+        Public method to embed metadata into the document.\
+\
+        Parameters:\
+        - document_path (str): The path to the document file.\
+        - format (str): The format of the document ('pdf' or 'docx').\
+\
+        Returns:\
+        - str: The path to the new document with embedded metadata.\
+        """\
+        return self.__embed_metadata(document_path, format)\
+\
+class SecureDocumentTransmitter:\
+    """\
+    Public class for securely transmitting documents.\
+\
+    Methods:\
+    - transmit_via_docsend(): Uses DocSend to securely transmit the document.\
+    - transmit_via_email(): Transmits the document via email (less secure).\
+    - compare_transmission_methods(): Compares the security of different transmission methods.\
+    """\
+\
+    def __init__(self):\
+        self.__metadata_manager = _MetadataManager()\
+\
+    def transmit_via_docsend(self, document_path, format):\
+        """\
+        Simulates transmitting the document via DocSend.\
+\
+        Parameters:\
+        - document_path (str): The path to the document file.\
+        - format (str): The format of the document ('pdf' or 'docx').\
+\
+        Returns:\
+        - str: A simulated secure DocSend link.\
+        """\
+        secured_document = self.__metadata_manager.embed_metadata(document_path, format)\
+        # Simulate uploading to DocSend and generating a secure link\
+        document_id = hashlib.md5(secured_document.encode()).hexdigest()\
+        secure_link = f"https://docsend.com/view/\{document_id\}"\
+        print(f"Document transmitted securely via DocSend: \{secure_link\}")\
+        return secure_link\
+\
+    def transmit_via_email(self, document_path, format):\
+        """\
+        Simulates transmitting the document via email.\
+\
+        Parameters:\
+        - document_path (str): The path to the document file.\
+        - format (str): The format of the document ('pdf' or 'docx').\
+\
+        Returns:\
+        - None\
+        """\
+        secured_document = self.__metadata_manager.embed_metadata(document_path, format)\
+        # Simulate sending the document via email\
+        print(f"Document sent via email: \{secured_document\}")\
+\
+    def compare_transmission_methods(self, document_path, format):\
+        """\
+        Compares the security risks of transmitting documents via DocSend vs email.\
+\
+        Parameters:\
+        - document_path (str): The path to the document file.\
+        - format (str): The format of the document ('pdf' or 'docx').\
+\
+        Returns:\
+        - None\
+        """\
+        print("Comparing transmission methods:")\
+        print("- DocSend: Secure, with access control and tracking.")\
+        print("- Email Attachment: Less secure, potential for unauthorized sharing.")\
+        self.transmit_via_docsend(document_path, format)\
+        self.transmit_via_email(document_path, format)\
+\
+def add_emoji_linked_combinatorics(keywords):\
+    """\
+    Generates a combination of emojis linked to the user's favorite keywords.\
+\
+    Parameters:\
+    - keywords (list): A list of favorite keywords.\
+\
+    Returns:\
+    - str: A string of emojis representing the keywords.\
+    """\
+    emoji_mapping = \{\
+        'security': '
+\f1 \uc0\u55357 \u56594 
+\f0 ',\
+        'confidential': '
+\f1 \uc0\u55358 \u56592 
+\f0 ',\
+        'urgent': '
+\f1 \uc0\u55357 \u57000 
+\f0 ',\
+        'review': '
+\f1 \uc0\u55357 \u56384 
+\f0 ',\
+        'approved': '
+\f1 \uc0\u9989 
+\f0 ',\
+    \}\
+    emojis = ''.join([emoji_mapping.get(keyword, '') for keyword in keywords])\
+    return emojis\
+\
+def create_keyword_sensitive_locked_sticker(keywords):\
+    """\
+    Creates a keyword-sensitive locked sticker (e.g., for WhatsApp implementation).\
+\
+    Parameters:\
+    - keywords (list): A list of sensitive keywords.\
+\
+    Returns:\
+    - Image: An image object representing the sticker.\
+    """\
+    emojis = add_emoji_linked_combinatorics(keywords)\
+    text = f"\{emojis\}\\nConfidential"\
+    # Create an image with the text and an AI-generated face (simulated here)\
+    img = Image.new('RGB', (200, 200), color='white')\
+    d = ImageDraw.Draw(img)\
+    font = ImageFont.load_default()\
+    d.text((10, 80), text, fill='black', font=font)\
+    # Simulate adding AI-generated face\
+    d.text((10, 150), 'AI Face Placeholder', fill='gray', font=font)\
+    # Add timestamp and location\
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")\
+    location = "Your Location"\
+    attribution = f"Author: Calvin Thomas\\nDate: \{timestamp\}\\nLocation: \{location\}"\
+    d.text((10, 10), attribution, fill='black', font=font)\
+    return img\
+\
+# Example usage\
+if __name__ == "__main__":\
+    transmitter = SecureDocumentTransmitter()\
+    document_path_pdf = "test_document.pdf"\
+    document_path_docx = "test_document.docx"\
+\
+    # Simulate comparing transmission methods for a PDF document\
+    transmitter.compare_transmission_methods(document_path_pdf, 'pdf')\
+\
+    # Create a keyword-sensitive locked sticker\
+    keywords = ['security', 'confidential']\
+    sticker = create_keyword_sensitive_locked_sticker(keywords)\
+    sticker_path = "locked_sticker.png"\
+    sticker.save(sticker_path)\
+    print(f"Keyword-sensitive locked sticker created: \{sticker_path\}")\
+}
